@@ -1,7 +1,5 @@
 package com.fortech.model.dto;
 
-import com.fortech.model.entities.CarEntity;
-
 public class CarDto {
 
     private String model;
@@ -9,7 +7,7 @@ public class CarDto {
     private String fuel;
     private String transmission;
     private String description;
-    private double tariff;
+    private String tariff;
 
     public String getModel() {
         return model;
@@ -51,11 +49,11 @@ public class CarDto {
         this.description = description;
     }
 
-    public double getTariff() {
+    public String getTariff() {
         return tariff;
     }
 
-    public void setTariff(double tariff) {
+    public void setTariff(String tariff) {
         this.tariff = tariff;
     }
 }

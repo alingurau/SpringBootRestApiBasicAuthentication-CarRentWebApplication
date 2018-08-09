@@ -23,7 +23,7 @@ public class RentEntity {
     private UserEntity userId;
 
     public RentDto toDto() {
-        RentDto dto =new RentDto();
+        RentDto dto = new RentDto();
         dto.setStartDate(this.startDate);
         dto.setEndDate(this.endDate);
         return dto;

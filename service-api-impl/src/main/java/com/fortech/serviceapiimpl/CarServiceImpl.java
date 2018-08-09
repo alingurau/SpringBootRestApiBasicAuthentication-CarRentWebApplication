@@ -17,6 +17,11 @@ public class CarServiceImpl implements CarService {
     CarRepository carRepository;
 
     @Override
+    public boolean carExist(Long id) {
+        return carRepository.findById(id).isPresent();
+    }
+
+    @Override
     public List<CarDto> readAllCarsDto() {
         return carRepository.findAll()
                 .stream()

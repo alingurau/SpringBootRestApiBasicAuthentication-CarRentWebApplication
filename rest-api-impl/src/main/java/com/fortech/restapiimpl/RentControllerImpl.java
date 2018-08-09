@@ -19,21 +19,24 @@ public class RentControllerImpl implements RentController {
     RentService rentService;
 
     @Override
-    public ResponseEntity<List<RentDto>> readAllRents() {
-        return new ResponseEntity<>(rentService.readAllRentsDto(),HttpStatus.OK);
+    public List<RentDto> readAllRents() {
+        return rentService.readAllRentsDto();
     }
 
     @Override
     public ResponseEntity addRent(RentDto rentDto) {
+        if(rentDto != null){
         rentService.saveRent(rentDto);
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<>("RENT SAVED", HttpStatus.CREATED);
+    }
+    return new ResponseEntity("INVALID INPUT", HttpStatus.BAD_REQUEST);
     }
 
     @Override
-    public ResponseEntity updateCar(Long rentId, RentDto rentDto) {
-        if(rentDto != null){
+    public ResponseEntity updateRent(Long rentId, RentDto rentDto) {
+        if(rentId != null){
             rentService.updateRent(rentId, rentDto);
-            return new ResponseEntity<String>("RENT UPDATED", HttpStatus.OK);
+            return new ResponseEntity("RENT UPDATED", HttpStatus.OK);
         }
         return new ResponseEntity<String>("INVALID INPUT", HttpStatus.BAD_REQUEST);
     }
@@ -42,7 +45,9 @@ public class RentControllerImpl implements RentController {
     public ResponseEntity deleteRentById(Long rentId) {
         if(rentId != null){
             rentService.deleteRent(rentId);
+            return new ResponseEntity("RENT DELETED", HttpStatus.OK);
+
         }
-        return new ResponseEntity("RENT DELETED", HttpStatus.OK);
+        return new ResponseEntity("BAD REQUEST", HttpStatus.BAD_REQUEST);
     }
 }

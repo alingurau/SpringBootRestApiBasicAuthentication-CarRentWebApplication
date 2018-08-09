@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@EnableJpaRepositories({"com.fortech"})
-@EntityScan({"com.fortech"})
-@ComponentScan({"com.fortech"})
+@EnableJpaRepositories("com.fortech")
+@EntityScan("com.fortech")
+@ComponentScan("com.fortech")
 public class BootApplication {
 
     public static void main(String[] args) {

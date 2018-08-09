@@ -1,7 +1,6 @@
 package com.fortech.model.entities;
 
 import com.fortech.model.dto.CarDto;
-import com.fortech.model.dto.UserDto;
 
 import javax.persistence.*;
 
@@ -17,7 +16,7 @@ public class CarEntity {
     private String fuel;
     private String transmission;
     private String description;
-    private double tariff;
+    private String tariff;
 
     public CarDto toDto() {
         CarDto dto = new CarDto();
@@ -36,7 +35,7 @@ public class CarEntity {
         this.fuel = carDto.getFuel();
         this.description = carDto.getDescription();
         this.transmission = carDto.getTransmission();
-        this.tariff = carDto.getTariff();
+        this.tariff =  carDto.getTariff();
     }
 
     public Long getId() {
@@ -87,11 +86,11 @@ public class CarEntity {
         this.description = description;
     }
 
-    public double getTariff() {
+    public String getTariff() {
         return tariff;
     }
 
-    public void setTariff(double tariff) {
-        this.tariff = tariff;
+    public void setTariff(String tariff) {
+        this.tariff =  tariff;
     }
 }

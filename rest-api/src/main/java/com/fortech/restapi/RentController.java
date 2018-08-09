@@ -11,13 +11,13 @@ import java.util.List;
 public interface RentController {
 
     @GetMapping("/readAll")
-    ResponseEntity<List<RentDto>> readAllRents();
+    List<RentDto> readAllRents();
 
     @PostMapping("/addRent")
     ResponseEntity addRent(@RequestBody RentDto rentDto);
 
     @PutMapping("/updateRent/{rentId}")
-    ResponseEntity updateCar(@PathVariable Long rentId, @RequestBody RentDto rentDto);
+    ResponseEntity updateRent(@PathVariable Long rentId, @RequestBody RentDto rentDto);
 
     @DeleteMapping("/deleteRemt/{rentId}")
     ResponseEntity deleteRentById(@PathVariable Long rentId);

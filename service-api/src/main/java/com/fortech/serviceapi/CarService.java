@@ -12,7 +12,9 @@ public interface CarService {
 
     void saveCar(CarDto carDto);
 
-    void  updateCar(Long carId, CarDto carDto);
+    void updateCar(Long carId, CarDto carDto);
 
     void deleteCar(Long carId);
+
+    boolean carExist(Long id);
 }
