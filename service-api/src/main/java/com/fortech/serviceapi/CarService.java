@@ -16,5 +16,5 @@ public interface CarService {
 
     void deleteCar(Long carId);
 
-    boolean carExist(Long id);
+    boolean ifCarIdExistsInDatabase(Long id);
 }

@@ -90,7 +90,7 @@ public class CarControllerApiImplTests {
     public void updateCar_ShouldReturnHttpStatusOK() {
         CarEntity carEntity = new CarEntity();
         CarDto carDto = new CarDto();
-        when(carServiceMock.carExist(carEntity.getId())).thenReturn(true);
+        when(carServiceMock.ifCarIdExistsInDatabase(carEntity.getId())).thenReturn(true);
 
         ResponseEntity result = carControllerImpl.updateCar(carEntity.getId(), carDto);
 
@@ -114,7 +114,7 @@ public class CarControllerApiImplTests {
     public void deleteCar_ShouldReturnHttpStatusOK() {
         CarEntity carEntity = new CarEntity();
 
-        when(carServiceMock.carExist(carEntity.getId())).thenReturn(true);
+        when(carServiceMock.ifCarIdExistsInDatabase(carEntity.getId())).thenReturn(true);
         ResponseEntity result = carControllerImpl.deleteCarById(carEntity.getId());
 
         ResponseEntity expect = new ResponseEntity<>("CAR DELETED", HttpStatus.OK);
@@ -125,7 +125,7 @@ public class CarControllerApiImplTests {
     public void deleteCar_ShouldReturnHttpStatusBadRequest() {
         CarEntity carEntity = new CarEntity();
 
-        when(carServiceMock.carExist(carEntity.getId())).thenReturn(false);
+        when(carServiceMock.ifCarIdExistsInDatabase(carEntity.getId())).thenReturn(false);
 
         ResponseEntity result = carControllerImpl.deleteCarById(carEntity.getId());
 

@@ -34,7 +34,7 @@ public class CarControllerImpl implements CarController {
 
     @Override
     public ResponseEntity updateCar(Long carId, CarDto carDto) {
-        if (carService.carExist(carId)) {
+        if (carService.ifCarIdExistsInDatabase(carId)) {
             carService.updateCar(carId, carDto);
             return new ResponseEntity<>("CAR UPDATED", HttpStatus.OK);
         }
@@ -43,7 +43,7 @@ public class CarControllerImpl implements CarController {
 
     @Override
     public ResponseEntity deleteCarById(Long carId) {
-        if (carService.carExist(carId)) {
+        if (carService.ifCarIdExistsInDatabase(carId)) {
             carService.deleteCar(carId);
             return new ResponseEntity<>("CAR DELETED", HttpStatus.OK);
         }

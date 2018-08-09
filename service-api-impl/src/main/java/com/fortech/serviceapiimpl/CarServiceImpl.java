@@ -17,7 +17,7 @@ public class CarServiceImpl implements CarService {
     CarRepository carRepository;
 
     @Override
-    public boolean carExist(Long id) {
+    public boolean ifCarIdExistsInDatabase(Long id) {
         return carRepository.findById(id).isPresent();
     }
 
