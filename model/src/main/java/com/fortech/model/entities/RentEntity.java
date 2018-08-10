@@ -17,10 +17,10 @@ public class RentEntity {
     private Date endDate;
 
     @ManyToOne
-    private CarEntity carId;
+    private CarEntity car;
 
     @ManyToOne
-    private UserEntity userId;
+    private UserEntity user;
 
     public RentDto toDto() {
         RentDto dto = new RentDto();
@@ -58,19 +58,19 @@ public class RentEntity {
         this.endDate = endDate;
     }
 
-    public CarEntity getCarId() {
-        return carId;
+    public CarEntity getCar() {
+        return car;
     }
 
-    public void setCarId(CarEntity carId) {
-        this.carId = carId;
+    public void setCar(CarEntity car) {
+        this.car = car;
     }
 
-    public UserEntity getUserId() {
-        return userId;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserId(UserEntity userId) {
-        this.userId = userId;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

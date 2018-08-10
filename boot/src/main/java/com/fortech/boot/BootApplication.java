@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories("com.fortech")
-@EntityScan("com.fortech")
+@EntityScan("com.fortech.model")
 @ComponentScan("com.fortech")
 public class BootApplication {
 

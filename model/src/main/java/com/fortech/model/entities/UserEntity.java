@@ -3,6 +3,7 @@ package com.fortech.model.entities;
 import com.fortech.model.dto.UserDto;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -16,6 +17,10 @@ public class UserEntity {
     private String email;
     private String username;
     private String password;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleEntity> roleName;
 
     public UserDto toDto() {
         UserDto dto = new UserDto();
@@ -83,4 +88,11 @@ public class UserEntity {
         this.password = password;
     }
 
+    public Set<RoleEntity> getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(Set<RoleEntity> roleName) {
+        this.roleName = roleName;
+    }
 }

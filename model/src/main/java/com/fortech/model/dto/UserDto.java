@@ -1,6 +1,9 @@
 package com.fortech.model.dto;
 
+import com.fortech.model.entities.RoleEntity;
 import com.fortech.model.entities.UserEntity;
+
+import java.util.Set;
 
 public class UserDto {
 
@@ -9,6 +12,7 @@ public class UserDto {
     private String email;
     private String username;
     private String password;
+    private Set<RoleEntity> roleName;
 
 
     public String getFirstName() {
@@ -49,5 +53,13 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<RoleEntity> getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(Set<RoleEntity> roleName) {
+        this.roleName = roleName;
     }
 }
