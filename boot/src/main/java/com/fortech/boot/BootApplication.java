@@ -8,7 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableAutoConfiguration
 @EnableJpaRepositories("com.fortech")
 @EntityScan("com.fortech")
 @ComponentScan("com.fortech")
