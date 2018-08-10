@@ -14,6 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class CarControllerApiImplTests {
     @Mock
     CarService carServiceMock;
 
+    CarDto  carDto= new CarDto();
     private String model = "Mercedes-Benz";
     private String modelYear = "2018";
     private String fuel = "DIESEL";
@@ -39,27 +41,13 @@ public class CarControllerApiImplTests {
 
     @Test
     public void readAllCars_ShouldReturnAList() {
-        CarEntity carEntity = new CarEntity();
-        carEntity.setModel(model);
-        carEntity.setModelYear(modelYear);
-        carEntity.setFuel(fuel);
-        carEntity.setTransmission(transmission);
-        carEntity.setDescription(description);
-        carEntity.setTariff(tariff);
-        List<CarDto> carEntities = Collections.singletonList(carEntity.toDto());
+       List<CarDto> allCars = new ArrayList<>();
+       allCars.add(carDto);
+       when(carServiceMock.readAllCarsDto()).thenReturn(allCars);
 
-        when(carServiceMock.readAllCarsDto()).thenReturn(carEntities);
+       List<CarDto> result = carControllerImpl.readAllCars();
 
-        List<CarDto> result = carControllerImpl.readAllCars();
-
-        assertEquals(1, result.size());
-        CarDto resultCar = result.get(0);
-        assertEquals(model, resultCar.getModel());
-        assertEquals(modelYear, resultCar.getModelYear());
-        assertEquals(fuel, resultCar.getFuel());
-        assertEquals(transmission, resultCar.getTransmission());
-        assertEquals(description, resultCar.getDescription());
-        assertEquals(tariff, resultCar.getTariff());
+       assertEquals(allCars, result);
     }
 
     @Test
