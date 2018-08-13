@@ -20,7 +20,11 @@ public class UserEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<RoleEntity> roleName;
+    private Set<RoleEntity> roles;
+
+    public UserEntity() {
+
+    }
 
     public UserDto toDto() {
         UserDto dto = new UserDto();
@@ -32,12 +36,12 @@ public class UserEntity {
         return dto;
     }
 
-    public void update(UserDto userDto){
+    public void update(UserDto userDto) {
         this.firstName = userDto.getFirstName();
-        this.lastName=userDto.getLastName();
-        this.email=userDto.getEmail();
-        this.username=userDto.getUsername();
-        this.password=userDto.getPassword();
+        this.lastName = userDto.getLastName();
+        this.email = userDto.getEmail();
+        this.username = userDto.getUsername();
+        this.password = userDto.getPassword();
     }
 
     public Long getId() {
@@ -88,11 +92,11 @@ public class UserEntity {
         this.password = password;
     }
 
-    public Set<RoleEntity> getRoleName() {
-        return roleName;
+    public Set<RoleEntity> getRoles() {
+        return roles;
     }
 
-    public void setRoleName(Set<RoleEntity> roleName) {
-        this.roleName = roleName;
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
     }
 }

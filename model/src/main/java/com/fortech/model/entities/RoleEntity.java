@@ -9,7 +9,9 @@ public class RoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String roleName;
+    private String role;
+
+
 
     public Long getId() {
         return id;
@@ -19,11 +21,11 @@ public class RoleEntity {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

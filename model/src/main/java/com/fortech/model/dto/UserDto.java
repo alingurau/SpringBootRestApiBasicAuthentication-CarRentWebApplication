@@ -1,7 +1,6 @@
 package com.fortech.model.dto;
 
 import com.fortech.model.entities.RoleEntity;
-import com.fortech.model.entities.UserEntity;
 
 import java.util.Set;
 

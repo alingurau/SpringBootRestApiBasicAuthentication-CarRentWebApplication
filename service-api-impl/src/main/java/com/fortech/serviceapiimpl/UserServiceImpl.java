@@ -7,19 +7,19 @@ import com.fortech.model.repositories.RoleRepository;
 import com.fortech.model.repositories.UserRepository;
 import com.fortech.serviceapi.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserRepository userRepository;
+     private UserRepository userRepository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -32,11 +32,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUserWithRole(UserEntity userEntity) {
-        userEntity.setPassword(bCryptPasswordEncoder.encode(userEntity.getPassword()));
+    public void saveUser(UserDto userDto) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.update(userDto);
+
+        userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         RoleEntity userRole = roleRepository.findByRole("ADMIN");
-        userEntity.setRoleName(new HashSet<RoleEntity>(Arrays.asList(userRole)));
-        userRepository.save(userEntity).toDto();
+        userDto.setRoleName(new HashSet<RoleEntity>(Arrays.asList(userRole)));
+        userRepository.save(userEntity);
     }
 
 
@@ -49,12 +52,27 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    @Override
-    public void saveUser(UserDto userDto) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.update(userDto);
-        userRepository.save(userEntity);
-    }
+//    @Override
+//    @Transactional
+//    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+//        UserEntity userEntity = userRepository.findByEmail(userName);
+//        List<GrantedAuthority> authorities = getUserAuthority(userEntity.getRoles());
+//        return buildUserForAuthentication(userEntity.toDto(), authorities);
+//    }
+
+//    private List<GrantedAuthority> getUserAuthority(Set<RoleEntity> userRoles) {
+//        Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
+//        for (RoleEntity role : userRoles) {
+//            roles.add(new SimpleGrantedAuthority(role.getRole()));
+//        }
+//
+//        List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(roles);
+//        return grantedAuthorities;
+//    }
+
+//    private UserDetails buildUserForAuthentication(UserDto userDto, List<GrantedAuthority> authorities) {
+//        return new org.springframework.security.core.userdetails.User(userDto.getEmail(), userDto.getPassword(), true, true, authorities);
+//    }
 
     @Override
     public boolean existIdInDatabase(Long userId) {
