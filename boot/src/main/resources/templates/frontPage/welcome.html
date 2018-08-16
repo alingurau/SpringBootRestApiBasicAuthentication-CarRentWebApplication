@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<style>
+    *{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .header h1 {
+        font-size: 40px;
+
+    }
+
+    .header{
+        padding: 60px; /* some padding */
+        text-align: center; /* center the text */
+        background: black;
+        color: white; /* white text color */
+        /*opacity: 0.5;*/
+    }
+    /* Style the top navigation bar */
+    .navbar {
+        overflow: hidden; /* Hide overflow */
+        background-color: black; /* Dark background color */
+        /*opacity: 0.8;*/
+    }
+    /* Style the navigation bar links */
+    .navbar a{
+        float: left; /* Make sure that the links stay side-by-side */
+        display: block; /* Change the display to block, for responsive reasons (see below) */
+        color: white; /* White text color */
+        text-align: center; /* Center the text */
+        padding: 14px 20px; /* Add some padding */
+        text-decoration: none; /* Remove underline */
+    }
+    /* Right-aligned link */
+    .navbar a.right {
+        float: right; /* Float a link to the right */
+    }
+    /* Change color on hover/mouse-over */
+    .navbar a:hover {
+        background-color: #ddd; /* Grey background color */
+        color: black; /* Black text color */
+    }
+    .navbar input.right{
+        float: right;
+        padding: 6px;
+        border: none;
+        margin-top: 8px;
+        margin-right: 14px;
+        font-size: 12px;
+    }
+</style>
+</head>
+<body  background="http://www.hdcarwallpapers.com/walls/super_sports_cars-HD.jpg">
+<div class="header">
+    <h1 >RENTAL CARS</h1>
+</div>
+<div class="navbar">
+    <a href="/user/signup.html">CARS</a>
+    <a href=""></a>
+    <a href="#" class="right">GO</a>
+    <input type="text" class="right" placeholder="Search..">
+    <a href="/user/login.html" class="right">LOGIN</a>
+</div>
+
+
+</body>
+</html>

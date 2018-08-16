@@ -1,11 +1,11 @@
 package com.fortech.model.repositories;
 
-import com.fortech.model.entities.RoleEntity;
+import com.fortech.model.entities.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
-    RoleEntity findByRole(String role);
+public interface RoleRepository extends JpaRepository<Role, Long> {
+    Role findByRole(String role);
 
 }

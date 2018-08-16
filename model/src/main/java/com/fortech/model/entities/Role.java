@@ -3,15 +3,15 @@ package com.fortech.model.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "roles")
-public class RoleEntity {
+@Table(name="role")
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="role_id")
     private Long id;
+    @Column(name="role")
     private String role;
-
-
 
     public Long getId() {
         return id;

@@ -20,7 +20,10 @@ public class RentEntity {
     private CarEntity car;
 
     @ManyToOne
-    private UserEntity user;
+    private User user;
+
+    @ManyToOne
+    private LocationEntity location;
 
     public RentDto toDto() {
         RentDto dto = new RentDto();
@@ -66,11 +69,19 @@ public class RentEntity {
         this.car = car;
     }
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(User user) {
         this.user = user;
+    }
+
+    public LocationEntity getLocation() {
+        return location;
+    }
+
+    public void setLocation(LocationEntity location) {
+        this.location = location;
     }
 }
