@@ -5,37 +5,34 @@ import com.fortech.model.dto.CarDto;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cars")
-public class CarEntity {
+@Table(name = "car")
+public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "model")
     private String model;
+    @Column(name = "model_year")
     private String modelYear;
+    @Column(name = "fuel")
     private String fuel;
+    @Column(name = "transmission")
     private String transmission;
+    @Column(name = "description")
     private String description;
-    private String tariff;
+    @Column(name = "tariff")
+    private double tariff;
 
-    public CarDto toDto() {
-        CarDto dto = new CarDto();
-        dto.setModel(this.model);
-        dto.setModelYear(this.modelYear);
-        dto.setFuel(this.fuel);
-        dto.setTransmission(this.transmission);
-        dto.setDescription(this.description);
-        dto.setTariff(this.tariff);
-        return dto;
-    }
-
-    public void update(CarDto carDto) {
-        this.model = carDto.getModel();
-        this.modelYear = carDto.getModelYear();
-        this.fuel = carDto.getFuel();
-        this.description = carDto.getDescription();
-        this.transmission = carDto.getTransmission();
-        this.tariff =  carDto.getTariff();
+    public CarDto translateToCarDto(){
+        CarDto car = new CarDto();
+        car.setModel(this.model);
+        car.setModelYear(this.modelYear);
+        car.setFuel(this.fuel);
+        car.setTransmission(this.transmission);
+        car.setDescription(this.description);
+        car.setTariff(this.tariff);
+        return car;
     }
 
     public Long getId() {
@@ -86,11 +83,11 @@ public class CarEntity {
         this.description = description;
     }
 
-    public String getTariff() {
+    public double getTariff() {
         return tariff;
     }
 
-    public void setTariff(String tariff) {
-        this.tariff =  tariff;
+    public void setTariff(double tariff) {
+        this.tariff = tariff;
     }
 }

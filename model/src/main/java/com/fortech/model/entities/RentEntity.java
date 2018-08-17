@@ -17,7 +17,7 @@ public class RentEntity {
     private Date endDate;
 
     @ManyToOne
-    private CarEntity car;
+    private Car car;
 
     @ManyToOne
     private User user;
@@ -61,11 +61,11 @@ public class RentEntity {
         this.endDate = endDate;
     }
 
-    public CarEntity getCar() {
+    public Car getCar() {
         return car;
     }
 
-    public void setCar(CarEntity car) {
+    public void setCar(Car car) {
         this.car = car;
     }
 

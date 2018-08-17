@@ -7,7 +7,7 @@ public class CarDto {
     private String fuel;
     private String transmission;
     private String description;
-    private String tariff;
+    private double tariff;
 
     public String getModel() {
         return model;
@@ -49,11 +49,11 @@ public class CarDto {
         this.description = description;
     }
 
-    public String getTariff() {
+    public double getTariff() {
         return tariff;
     }
 
-    public void setTariff(String tariff) {
+    public void setTariff(double tariff) {
         this.tariff = tariff;
     }
 }

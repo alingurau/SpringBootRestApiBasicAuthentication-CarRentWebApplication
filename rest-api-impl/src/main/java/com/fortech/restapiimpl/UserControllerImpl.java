@@ -34,7 +34,7 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public ResponseEntity updateUser(Long userId, UserDto updateUser) {
-        if (userService.existIdInDatabase(userId)) {
+        if (userService.ifUserIdExistsInDatabase(userId)) {
             userService.updateUser(userId, updateUser);
             return new ResponseEntity<>("USER UPDATED", HttpStatus.OK);
         }
@@ -43,7 +43,7 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public ResponseEntity deleteUserById(Long userId) {
-        if (userService.existIdInDatabase(userId)) {
+        if (userService.ifUserIdExistsInDatabase(userId)) {
             userService.deleteUser(userId);
             return new ResponseEntity("USER DELETED", HttpStatus.OK);
         }

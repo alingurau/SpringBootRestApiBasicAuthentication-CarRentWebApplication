@@ -16,7 +16,7 @@ public  class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public boolean existIdInDatabase(Long userId) {
+    public boolean ifUserIdExistsInDatabase(Long userId) {
         return userRepository.findById(userId).isPresent();
     }
 

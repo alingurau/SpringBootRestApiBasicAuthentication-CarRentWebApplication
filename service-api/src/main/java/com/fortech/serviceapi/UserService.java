@@ -12,11 +12,11 @@ public interface UserService  {
 
     List<UserDto> readAllUsersDto();
 
+    void saveUser(UserDto userDto);
+
     void  updateUser(Long userId, UserDto userDto);
 
     void deleteUser(Long userId);
 
-    boolean existIdInDatabase(Long userId);
-
-void saveUser(UserDto userDto);
+    boolean ifUserIdExistsInDatabase(Long userId);
 }

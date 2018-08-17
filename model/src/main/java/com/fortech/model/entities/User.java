@@ -3,7 +3,6 @@ package com.fortech.model.entities;
 import com.fortech.model.dto.UserDto;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Set;
 
 @Entity
