@@ -10,6 +10,9 @@ import java.util.List;
 @Service
 public interface UserService  {
 
+    User findUserByEmail(String email);
+
+
     List<UserDto> readAllUsersDto();
 
 //    User addUser(UserDto userDto);
