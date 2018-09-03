@@ -3,17 +3,14 @@ package com.fortech.restapi;
 import com.fortech.model.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
-@CrossOrigin(origins = "http://localhost:4200")
 
 @RestController
-@RequestMapping("/users")
 public interface UserController {
 
-    @GetMapping("/readAll")
-    List<UserDto> readAllUsers();
+    @RequestMapping(value = "/user/edit", method = RequestMethod.GET)
+    ModelAndView editUser();
 
     @PostMapping("/addUser")
     ResponseEntity addUser(@RequestBody UserDto user);
