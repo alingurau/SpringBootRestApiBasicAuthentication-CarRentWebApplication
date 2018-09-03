@@ -1,6 +1,7 @@
 package com.fortech.serviceapi;
 
 import com.fortech.model.dto.CarDto;
+import com.fortech.model.entities.Car;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,11 +11,12 @@ public interface CarService {
 
     List<CarDto> readAllCarsDto();
 
-    void saveCar(CarDto carDto);
+    Car addCar(CarDto carDto);
 
-    void updateCar(Long carId, CarDto carDto);
+    Car updateCar(Long carId, CarDto carDto);
 
     void deleteCar(Long carId);
 
     boolean ifCarIdExistsInDatabase(Long carId);
+
 }

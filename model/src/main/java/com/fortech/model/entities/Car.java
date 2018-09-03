@@ -3,6 +3,8 @@ package com.fortech.model.entities;
 import com.fortech.model.dto.CarDto;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "car")
@@ -24,7 +26,7 @@ public class Car {
     @Column(name = "tariff")
     private double tariff;
 
-    public CarDto translateToCarDto(){
+    public CarDto carDto(){
         CarDto car = new CarDto();
         car.setModel(this.model);
         car.setModelYear(this.modelYear);
@@ -33,6 +35,15 @@ public class Car {
         car.setDescription(this.description);
         car.setTariff(this.tariff);
         return car;
+    }
+
+    public void update(CarDto carDto){
+        this.model = carDto.getModel();
+        this.modelYear = carDto.getModelYear();
+        this.fuel = carDto.getFuel();
+        this.transmission = carDto.getTransmission();
+        this.description = carDto.getDescription();
+        this.tariff=carDto.getTariff();
     }
 
     public Long getId() {

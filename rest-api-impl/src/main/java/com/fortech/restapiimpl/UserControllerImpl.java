@@ -24,13 +24,18 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity addUser(UserDto userDto) {
-        if (userDto != null) {
-            userService.saveUser(userDto);
-            return new ResponseEntity<String>("USER SAVED", HttpStatus.CREATED);
-        }
-        return new ResponseEntity<String>("INVALID INPUT", HttpStatus.BAD_REQUEST);
+    public ResponseEntity addUser(UserDto user) {
+        return null;
     }
+
+//    @Override
+//    public ResponseEntity addUser(User user) {
+//        if (user != null) {
+//            userService.saveUser(user);
+//            return new ResponseEntity<String>("USER SAVED", HttpStatus.CREATED);
+//        }
+//        return new ResponseEntity<String>("INVALID INPUT", HttpStatus.BAD_REQUEST);
+//    }
 
     @Override
     public ResponseEntity updateUser(Long userId, UserDto updateUser) {

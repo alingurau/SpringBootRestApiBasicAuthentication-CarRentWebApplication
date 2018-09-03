@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,9 +25,9 @@ public class CarControllerImpl implements CarController {
     }
 
     @Override
-    public ResponseEntity addCar(CarDto carDto) {
+    public ResponseEntity addCar(@RequestBody  CarDto carDto) {
         if (carDto != null) {
-            carService.saveCar(carDto);
+            carService.addCar(carDto);
             return new ResponseEntity<>("CAR SAVED", HttpStatus.CREATED);
         }
         return new ResponseEntity<String>("INVALID INPUT", HttpStatus.BAD_REQUEST);

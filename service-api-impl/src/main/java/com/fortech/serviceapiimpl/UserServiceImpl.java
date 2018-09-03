@@ -2,6 +2,7 @@ package com.fortech.serviceapiimpl;
 
 import com.fortech.model.dto.UserDto;
 import com.fortech.model.entities.User;
+import com.fortech.model.repositories.RoleRepository;
 import com.fortech.model.repositories.UserRepository;
 import com.fortech.serviceapi.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,12 @@ public  class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
+
+//    @Autowired
+//    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public boolean ifUserIdExistsInDatabase(Long userId) {
@@ -30,12 +37,15 @@ public  class UserServiceImpl implements UserService {
     }
 
 
+
+
     @Override
-    public void updateUser(Long userId, UserDto userDto) {
-        userRepository.findById(userId);
-        User user = new User();
-        user.translateToUserDto();
-        userRepository.save(user);
+    public User updateUser(Long userId, UserDto userDto) {
+
+        User user =userRepository.findById(userId).get();
+        user.update(userDto);
+
+        return userRepository.save(user);
     }
 
     @Override
@@ -47,12 +57,19 @@ public  class UserServiceImpl implements UserService {
     }
 
 
-    @Override
-    public void saveUser(UserDto userDto) {
-        User user = new User();
-        user.translateToUserDto();
-        userRepository.save(user);
-    }
+//    @Override
+//    public void addUser(UserDto userDto) {
+//        if(roleRepository.findAll().isEmpty())
+//            createRoles();
+//
+//        User user = new User();
+//        user.update(userDto);
+//        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+//        user.setActive(true);
+//        user.setRoles(new HashSet<Role>(Arrays.asList(getRoleForUser())));
+//
+//        userRepository.save(user);
+//    }
 
 
 

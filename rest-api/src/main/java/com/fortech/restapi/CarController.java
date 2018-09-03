@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path ="/cars")
+@RequestMapping(path = "/cars")
 public interface CarController {
 
     @GetMapping("/readAll")

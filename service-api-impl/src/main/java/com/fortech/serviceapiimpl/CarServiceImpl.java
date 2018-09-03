@@ -25,23 +25,23 @@ public class CarServiceImpl implements CarService {
     public List<CarDto> readAllCarsDto() {
         return carRepository.findAll()
                 .stream()
-                .map(Car::translateToCarDto)
+                .map(Car::carDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void saveCar(CarDto carDto) {
+    public Car addCar(CarDto carDto) {
         Car car = new Car();
-        car.translateToCarDto();
+        car.update(carDto);
         carRepository.save(car);
+        return car;
     }
 
     @Override
-    public void updateCar(Long carId, CarDto carDto) {
-        carRepository.findById(carId);
-        Car car = new Car();
-        car.translateToCarDto();
-        carRepository.save(car);
+    public Car updateCar(Long carId, CarDto carDto) {
+        Car car =  carRepository.findById(carId).get();
+        car.update(carDto);
+        return carRepository.save(car);
     }
 
     @Override
