@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public  class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
@@ -28,6 +28,11 @@ public  class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
     public List<UserDto> readAllUsersDto() {
         List<UserDto> user = new ArrayList<>();
         userRepository.findAll().forEach((users) -> {
@@ -37,12 +42,10 @@ public  class UserServiceImpl implements UserService {
     }
 
 
-
-
     @Override
     public User updateUser(Long userId, UserDto userDto) {
 
-        User user =userRepository.findById(userId).get();
+        User user = userRepository.findById(userId).get();
         user.update(userDto);
 
         return userRepository.save(user);
@@ -72,7 +75,6 @@ public  class UserServiceImpl implements UserService {
 //    }
 
 
-
 //    private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
 //        Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
 //        for (Role role : userRoles) {
@@ -86,10 +88,6 @@ public  class UserServiceImpl implements UserService {
 //    private UserDetails buildUserForAuthentication(UserDto userDto, List<GrantedAuthority> authorities) {
 //        return new org.springframework.security.core.userdetails.User(userDto.getEmail(), userDto.getPassword(), true, true, authorities);
 // }
-
-
-
-
 
 
 //    public User findByEmail(String email){
