@@ -1,17 +1,19 @@
 package com.fortech.restapiimpl;
 
 import com.fortech.model.dto.UserDto;
+import com.fortech.model.entities.User;
 import com.fortech.restapi.UserController;
 import com.fortech.serviceapi.UserService;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 
-@CrossOrigin
 @RestController
 public class UserControllerImpl implements UserController {
 
@@ -19,8 +21,21 @@ public class UserControllerImpl implements UserController {
     UserService userService;
 
     @Override
-    public List<UserDto> readAllUsers() {
-        return userService.readAllUsersDto();
+    @RequestMapping(value = "/user/edit", method = RequestMethod.GET)
+    public ModelAndView editUser() {
+        ModelAndView modelAndView = new ModelAndView();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        User user = userService.findUserByEmail(email);
+
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("title", "Edit my account");
+        modelAndView.addObject("action", "/user/edit");
+        modelAndView.setViewName("registration");
+
+        return modelAndView;
     }
 
     @Override
