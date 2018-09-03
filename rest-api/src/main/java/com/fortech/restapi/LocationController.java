@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "locations")
+@RequestMapping(path = "/locations")
 public interface LocationController {
 
     @GetMapping("/readAll")

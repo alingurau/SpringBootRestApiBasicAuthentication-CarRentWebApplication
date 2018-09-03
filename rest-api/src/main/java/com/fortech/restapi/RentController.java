@@ -19,6 +19,6 @@ public interface RentController {
     @PutMapping("/updateRent/{rentId}")
     ResponseEntity updateRent(@PathVariable Long rentId, @RequestBody RentDto rentDto);
 
-    @DeleteMapping("/deleteRemt/{rentId}")
+    @DeleteMapping("/deleteRent/{rentId}")
     ResponseEntity deleteRentById(@PathVariable Long rentId);
 }

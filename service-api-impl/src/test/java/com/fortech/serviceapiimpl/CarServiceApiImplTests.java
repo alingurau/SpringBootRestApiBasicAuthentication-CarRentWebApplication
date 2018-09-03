@@ -1,7 +1,7 @@
 //package com.fortech.serviceapiimpl;
 //
 //import com.fortech.model.dto.CarDto;
-//import com.fortech.model.entities.CarEntity;
+//import com.fortech.model.entities.Car;
 //import com.fortech.model.repositories.CarRepository;
 //import org.junit.Assert;
 //import org.junit.Before;
@@ -12,16 +12,12 @@
 //import org.mockito.Mockito;
 //import org.mockito.MockitoAnnotations;
 //import org.mockito.junit.MockitoJUnitRunner;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
 //
 //import java.util.ArrayList;
-//import java.util.Arrays;
 //import java.util.List;
 //
 //import static junit.framework.TestCase.assertTrue;
 //import static org.junit.Assert.assertEquals;
-//import static org.mockito.ArgumentMatchers.argThat;
 //import static org.mockito.Mockito.times;
 //import static org.mockito.Mockito.when;
 //
@@ -39,24 +35,24 @@
 ////        MockitoAnnotations.initMocks(this);
 ////    }
 //
-//    CarEntity carEntity = new CarEntity();
+//    Car car = new Car();
 //    private String model = "BMW";
 //    private String modelYear = "2018";
 //    private String fuel = "DIESEL";
 //    private String transmission = "MANUAL";
 //    private String description = "All the power under one hood";
-//    private String tariff = "50";
+//    private double tariff = Double.parseDouble("50.25");
 //
 //    @Test
 //    public void readAllCarsDto_ShouldReturnAList() {
-//    List<CarEntity> allCars = new ArrayList<>();
-//    allCars.add(carEntity);
+//    List<Car> allCars = new ArrayList<>();
+//    allCars.add(car);
 //    when(carRepositoryMock.findAll()).thenReturn(allCars);
 //
 //    List<CarDto> result = carServiceImpl.readAllCarsDto();
 //
 //    List<CarDto> expect = new ArrayList<>();
-//    expect.add(carEntity.toDto());
+//    expect.add(car.translateToCarDto());
 //    Assert.assertEquals(result,expect);
 //
 //    }
@@ -68,16 +64,16 @@
 //
 //        assertTrue(result.isEmpty());
 //    }
-
+//
 //    @Test
 //    public void addCar_ShouldReturnCarSaved()  {
-//        CarEntity carEntity = new CarEntity();
-//        CarEntity result = carServiceImpl.saveCar(carEntity.toDto());
+//        Car car = new Car();
+//        Car result = carServiceImpl.saveCar(car.translateToCarDto());
 //
-//        CarEntity expect = carRepositoryMock.save(carEntity);
+//        Car expect = carRepositoryMock.save(car);
 //        assertEquals(result, expect);
 //    }
-
+//
 //    @Test
 //    public void saveCar_ShouldVerifyIfMethodIsCalled(){
 //
@@ -91,16 +87,16 @@
 //
 //        carServiceImpl.saveCar(carDto);
 //
-//        Mockito.verify(carRepositoryMock, times(1).save(carDto));
+//        Mockito.verify( carRepositoryMock.save(car));
 //    }
 //
 //    @Test
 //    public void deleteCar_ShouldVerifyIfMethodIsCalled() {
-//        CarEntity carEntity = new CarEntity();
-//        carRepositoryMock.findById(carEntity.getId());
-//        carServiceImpl.deleteCar(carEntity.getId());
+//        Car car= new Car();
+//        carRepositoryMock.findById(car.getId());
+//        carServiceImpl.deleteCar(car.getId());
 //
-//        Mockito.verify(carRepositoryMock, times(1)).deleteById(carEntity.getId());
+//        Mockito.verify(carRepositoryMock, times(1)).deleteById(car.getId());
 //    }
 //
 //}
