@@ -1,11 +1,8 @@
 package com.fortech.model.entities;
 
 import com.fortech.model.dto.UserDto;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
@@ -14,19 +11,14 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
     private Long id;
 
     private String firstName;
 
     private String lastName;
 
-    @Email(message = "*Please provide a valid Email")
-    @NotEmpty(message = "*Please provide an email")
     private String email;
 
-    @Length(min = 6, message = "*Your password must have at least 6 characters")
-    @NotEmpty(message = "*Please provide your password")
     private String password;
 
     private boolean active;
@@ -36,13 +28,13 @@ public class User {
     private Set<Role> role;
 
     public UserDto translateToUserDto() {
-        UserDto user = new UserDto();
-        user.setFirstName(this.firstName);
-        user.setLastName(this.lastName);
-        user.setEmail(this.email);
-        user.setPassword(this.password);
-        user.setActive(this.active);
-        return user;
+        UserDto userDto = new UserDto();
+        userDto.setFirstName(this.firstName);
+        userDto.setLastName(this.lastName);
+        userDto.setEmail(this.email);
+        userDto.setPassword(this.password);
+        userDto.setActive(this.active);
+        return userDto;
     }
 
     public void update(UserDto userDto) {
