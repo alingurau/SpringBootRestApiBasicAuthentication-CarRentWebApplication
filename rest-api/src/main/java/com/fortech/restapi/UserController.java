@@ -5,6 +5,7 @@ import com.fortech.model.entities.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping(path = "/user")
 public interface UserController {
