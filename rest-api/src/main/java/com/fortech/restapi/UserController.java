@@ -1,23 +1,23 @@
 package com.fortech.restapi;
 
 import com.fortech.model.dto.UserDto;
+import com.fortech.model.entities.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 
 @RestController
+@RequestMapping(path = "/user")
 public interface UserController {
 
-    @RequestMapping(value = "/user/edit", method = RequestMethod.GET)
-    ModelAndView editUser();
+    @PostMapping("/add")
+    ResponseEntity addUser(@RequestBody User user);
 
-    @PostMapping("/addUser")
-    ResponseEntity addUser(@RequestBody UserDto user);
+    @RequestMapping("/get{id}")
+    ResponseEntity getUser(@PathVariable Long id);
 
-    @PutMapping("/updateUser/{userId}")
-    ResponseEntity updateUser(@PathVariable Long userId, @RequestBody UserDto userDto);
+    @PutMapping("/update{id}")
+    ResponseEntity updateUser(@PathVariable Long id, @RequestBody UserDto userDto);
 
-    @DeleteMapping("/deleteUser/{userId}")
-    ResponseEntity deleteUserById(@PathVariable Long userId);
+    @DeleteMapping("/delete{id}")
+    ResponseEntity deleteUser(@PathVariable Long id);
 }
