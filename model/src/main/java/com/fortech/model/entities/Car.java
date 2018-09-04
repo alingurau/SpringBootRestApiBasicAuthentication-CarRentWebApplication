@@ -105,4 +105,12 @@ public class Car {
     public void setTariff(double tariff) {
         this.tariff = tariff;
     }
+
+    public boolean isAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
 }

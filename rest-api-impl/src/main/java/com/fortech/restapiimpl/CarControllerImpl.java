@@ -20,8 +20,8 @@ public class CarControllerImpl implements CarController {
     CarService carService;
 
     @Override
-    public List<CarDto> readAllCars() {
-        return carService.readAllCarsDto();
+    public List<CarDto> listAllCars() {
+        return carService.listAllCarsAvailable();
     }
 
     @Override
@@ -30,24 +30,24 @@ public class CarControllerImpl implements CarController {
             carService.addCar(carDto);
             return new ResponseEntity<>("CAR SAVED", HttpStatus.CREATED);
         }
-        return new ResponseEntity<String>("INVALID INPUT", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("INVALID INPUT", HttpStatus.BAD_REQUEST);
     }
 
     @Override
-    public ResponseEntity updateCar(Long carId, CarDto carDto) {
-        if (carService.ifCarIdExistsInDatabase(carId)) {
-            carService.updateCar(carId, carDto);
+    public ResponseEntity updateCar(Long id, CarDto carDto) {
+        if (carService.carIdExists(id)) {
+            carService.updateCar(id, carDto);
             return new ResponseEntity<>("CAR UPDATED", HttpStatus.OK);
         }
-        return new ResponseEntity<String>("INVALID INPUT", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("INVALID INPUT", HttpStatus.BAD_REQUEST);
     }
 
     @Override
-    public ResponseEntity deleteCarById(Long carId) {
-        if (carService.ifCarIdExistsInDatabase(carId)) {
-            carService.deleteCar(carId);
+    public ResponseEntity deleteCar(Long id) {
+        if (carService.carIdExists(id)) {
+            carService.deleteCar(id);
             return new ResponseEntity<>("CAR DELETED", HttpStatus.OK);
         }
-        return new ResponseEntity<String>("BAD REQUEST", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("BAD REQUEST", HttpStatus.BAD_REQUEST);
     }
 }

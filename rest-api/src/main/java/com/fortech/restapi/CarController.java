@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/cars")
+@RequestMapping(path = "/car")
 public interface CarController {
 
-    @GetMapping("/readAll")
-    List<CarDto> readAllCars();
+    @GetMapping("/list")
+    List<CarDto> listAllCars();
 
-    @PostMapping("/addCar")
+    @PostMapping("/add")
     ResponseEntity addCar(@RequestBody CarDto carDto);
 
-    @PutMapping("/updateCar/{carId}")
-    ResponseEntity updateCar(@PathVariable Long carId, @RequestBody CarDto carDto);
+    @PutMapping("/update/{id}")
+    ResponseEntity updateCar(@PathVariable Long id, @RequestBody CarDto carDto);
 
-    @DeleteMapping("/deleteCar/{carId}")
-    ResponseEntity deleteCarById(@PathVariable Long carId);
+    @DeleteMapping("/delete/{id}")
+    ResponseEntity deleteCar(@PathVariable Long id);
 }
