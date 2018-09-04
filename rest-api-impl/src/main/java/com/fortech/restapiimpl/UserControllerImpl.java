@@ -6,6 +6,7 @@ import com.fortech.model.entities.User;
 import com.fortech.restapi.UserController;
 import com.fortech.serviceapi.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,11 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public ResponseEntity addUser(User user) {
-        return null;
+        if (user != null) {
+            userService.saveUser(user);
+            return new ResponseEntity("User Saved", HttpStatus.CREATED);
+        }
+        return new ResponseEntity("Invalid input", HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -53,19 +58,6 @@ public class UserControllerImpl implements UserController {
 //        return modelAndView;
 //    }
 //
-//    @Override
-//    public ResponseEntity addUser(UserDto user) {
-//        return null;
-//    }
-
-//    @Override
-//    public ResponseEntity addUser(User user) {
-//        if (user != null) {
-//            userService.saveUser(user);
-//            return new ResponseEntity<String>("USER SAVED", HttpStatus.CREATED);
-//        }
-//        return new ResponseEntity<String>("INVALID INPUT", HttpStatus.BAD_REQUEST);
-//    }
 
 //    @Override
 //    public ResponseEntity updateUser(Long userId, UserDto updateUser) {
