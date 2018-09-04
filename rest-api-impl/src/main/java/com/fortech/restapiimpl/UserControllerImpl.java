@@ -20,65 +20,31 @@ public class UserControllerImpl implements UserController {
     public ResponseEntity addUser(User user) {
         if (user != null) {
             userService.saveUser(user);
-            return new ResponseEntity("User Saved", HttpStatus.CREATED);
+            return new ResponseEntity("USER SAVED", HttpStatus.CREATED);
         }
-        return new ResponseEntity("Invalid input", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("INVALID INPUT", HttpStatus.BAD_REQUEST);
     }
 
     @Override
     public ResponseEntity getUser(Long id) {
         if (userService.userIdExists(id)) {
             userService.getUser(id);
-            return new ResponseEntity("User get", HttpStatus.OK);
+            return new ResponseEntity("USER GET", HttpStatus.OK);
         }
-        return new ResponseEntity("Invalid request", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("INVALID REQUEST", HttpStatus.BAD_REQUEST);
     }
 
     @Override
     public ResponseEntity updateUser(Long id, UserDto userDto) {
-        return null;
+        if (userService.userIdExists(id)) {
+            userService.updateUser(id, userDto);
+            return new ResponseEntity("USER UPDATED", HttpStatus.OK)
+        }
+        return new ResponseEntity("INVALID INPUT", HttpStatus.BAD_REQUEST);
     }
 
     @Override
     public ResponseEntity deleteUser(Long id) {
         return null;
     }
-
-//    @Override
-//    @RequestMapping(value = "/user/edit", method = RequestMethod.GET)
-//    public ModelAndView editUser() {
-//        ModelAndView modelAndView = new ModelAndView();
-//
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String email = authentication.getName();
-//
-//        User user = userService.findUserByEmail(email);
-//
-//        modelAndView.addObject("user", user);
-//        modelAndView.addObject("title", "Edit my account");
-//        modelAndView.addObject("action", "/user/edit");
-//        modelAndView.setViewName("registration");
-//
-//        return modelAndView;
-//    }
-//
-
-//    @Override
-//    public ResponseEntity updateUser(Long userId, UserDto updateUser) {
-//        if (userService.ifUserIdExistsInDatabase(userId)) {
-//            userService.updateUser(userId, updateUser);
-//            return new ResponseEntity<>("USER UPDATED", HttpStatus.OK);
-//        }
-//        return new ResponseEntity<String>("INVALID INPUT", HttpStatus.BAD_REQUEST);
-//    }
-//
-//    @Override
-//    public ResponseEntity deleteUserById(Long userId) {
-//        if (userService.ifUserIdExistsInDatabase(userId)) {
-//            userService.deleteUser(userId);
-//            return new ResponseEntity("USER DELETED", HttpStatus.OK);
-//        }
-//        return new ResponseEntity("BAD REQUEST", HttpStatus.BAD_REQUEST);
-//
-//    }
 }
