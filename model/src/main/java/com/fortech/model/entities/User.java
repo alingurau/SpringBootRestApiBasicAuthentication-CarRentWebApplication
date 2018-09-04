@@ -19,6 +19,8 @@ public class User {
 
     private String email;
 
+    private String username;
+
     private String password;
 
     private boolean active;
@@ -34,6 +36,7 @@ public class User {
         userDto.setEmail(this.email);
         userDto.setPassword(this.password);
         userDto.setActive(this.active);
+        userDto.setUsername(this.username);
         return userDto;
     }
 
@@ -43,6 +46,7 @@ public class User {
         this.email = userDto.getEmail();
         this.password = userDto.getPassword();
         this.active = userDto.isActive();
+        this.username = userDto.getUsername();
     }
 
     public Long getId() {
@@ -99,5 +103,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

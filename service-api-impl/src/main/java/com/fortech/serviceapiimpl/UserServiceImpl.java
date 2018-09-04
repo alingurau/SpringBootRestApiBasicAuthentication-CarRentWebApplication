@@ -7,11 +7,15 @@ import com.fortech.model.repositories.RoleRepository;
 import com.fortech.model.repositories.UserRepository;
 import com.fortech.serviceapi.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -49,12 +53,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(Long id, UserDto userDto) {
-        return null;
+        User user = userRepository.findById(id).get();
+        user.update(userDto);
+        return userRepository.save(user);
     }
 
     @Override
     public void deleteUser(Long id) {
-
+        userRepository.deleteById(id);
     }
 
     @Override
@@ -67,58 +73,25 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(userId).isPresent();
     }
 
+    @Transactional
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
+        List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
+        return buildUserForAuthentication(user, authorities);
+    }
 
-//    @Override
-//    public User updateUser(Long userId, UserDto userDto) {
-//
-//        User user = userRepository.findById(userId).get();
-//        user.update(userDto);
-//
-//        return userRepository.save(user);
-//    }
-//
-//    @Override
-//    public void deleteUser(Long userId) {
-//        userRepository.findAll().forEach(user -> {
-//            userRepository.deleteById(userId);
-//        });
-//
-//    }
+    private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
+        Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
+        for (Role role : userRoles) {
+            roles.add(new SimpleGrantedAuthority(role.getRole()));
+        }
 
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(roles);
+        return grantedAuthorities;
+    }
 
-//    private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
-//        Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
-//        for (Role role : userRoles) {
-//            roles.add(new SimpleGrantedAuthority(role.getRole()));
-//        }
-//
-//        List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(roles);
-//        return grantedAuthorities;
-//    }
+    private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), user.isActive(), true, true, true, authorities);
+    }
 
-//    private UserDetails buildUserForAuthentication(UserDto userDto, List<GrantedAuthority> authorities) {
-//        return new org.springframework.security.core.userdetails.User(userDto.getEmail(), userDto.getPassword(), true, true, authorities);
-// }
-
-
-//    public User findByEmail(String email){
-//        return userRepository.findByEmail(email);
-//    }
-//
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        User user = userRepository.findByEmail(email);
-//        if (user == null){
-//            throw new UsernameNotFoundException("Invalid username or password.");
-//        }
-//        return new org.springframework.security.core.userdetails.User(user.getEmail(),
-//                user.getPassword(),
-//                mapRolesToAuthorities(user.getRoles()));
-//    }
-//
-//    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
-//        return roles.stream()
-//                .map(role -> new SimpleGrantedAuthority(role.getName()))
-//                .collect(Collectors.toList());
-//    }
 }
