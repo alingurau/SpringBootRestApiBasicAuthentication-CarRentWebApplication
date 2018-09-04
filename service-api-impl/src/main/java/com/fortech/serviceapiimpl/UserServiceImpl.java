@@ -1,14 +1,17 @@
 package com.fortech.serviceapiimpl;
 
 import com.fortech.model.dto.UserDto;
+import com.fortech.model.entities.Role;
 import com.fortech.model.entities.User;
 import com.fortech.model.repositories.RoleRepository;
 import com.fortech.model.repositories.UserRepository;
 import com.fortech.serviceapi.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,17 +22,24 @@ public class UserServiceImpl implements UserService {
     @Autowired
     RoleRepository roleRepository;
 
-//    @Autowired
-//    private BCryptPasswordEncoder passwordEncoder;
-
-    @Override
-    public boolean userIdExists(Long userId) {
-        return userRepository.findById(userId).isPresent();
-    }
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public void saveUser(User user) {
-
+        if (userRepository.findAll().isEmpty()) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setActive(true);
+            Role userRole = roleRepository.findByRole("ADMIN");
+            user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+            userRepository.save(user);
+        } else {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setActive(true);
+            Role userRoleClient = roleRepository.findByRole("CLIENT");
+            user.setRoles(new HashSet<Role>(Arrays.asList(userRoleClient)));
+            userRepository.save(user);
+        }
     }
 
     @Override
@@ -52,14 +62,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
-//    @Override
-//    public List<UserDto> readAllUsersDto() {
-//        List<UserDto> user = new ArrayList<>();
-//        userRepository.findAll().forEach((users) -> {
-//            user.add(users.translateToUserDto());
-//        });
-//        return user;
-//    }
+    @Override
+    public boolean userIdExists(Long userId) {
+        return userRepository.findById(userId).isPresent();
+    }
 
 
 //    @Override
@@ -80,21 +86,6 @@ public class UserServiceImpl implements UserService {
 //    }
 
 
-//    @Override
-//    public void addUser(UserDto userDto) {
-//        if(roleRepository.findAll().isEmpty())
-//            createRoles();
-//
-//        User user = new User();
-//        user.update(userDto);
-//        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-//        user.setActive(true);
-//        user.setRoles(new HashSet<Role>(Arrays.asList(getRoleForUser())));
-//
-//        userRepository.save(user);
-//    }
-
-
 //    private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
 //        Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
 //        for (Role role : userRoles) {
@@ -112,16 +103,6 @@ public class UserServiceImpl implements UserService {
 
 //    public User findByEmail(String email){
 //        return userRepository.findByEmail(email);
-//    }
-//
-//    public User save(UserDto registration){
-//        User user = new User();
-//        user.setFirstName(registration.getFirstName());
-//        user.setLastName(registration.getLastName());
-//        user.setEmail(registration.getEmail());
-//        user.setPassword(passwordEncoder.encode(registration.getPassword()));
-//        user.setRoles(Arrays.asList(new Role("ROLE_USER")));
-//        return userRepository.save(user);
 //    }
 //
 //    @Override
