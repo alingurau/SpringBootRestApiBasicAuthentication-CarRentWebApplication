@@ -27,7 +27,11 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public ResponseEntity getUser(Long id) {
-        return null;
+        if (userService.userIdExists(id)) {
+            userService.getUser(id);
+            return new ResponseEntity("User get", HttpStatus.OK);
+        }
+        return new ResponseEntity("Invalid request", HttpStatus.BAD_REQUEST);
     }
 
     @Override

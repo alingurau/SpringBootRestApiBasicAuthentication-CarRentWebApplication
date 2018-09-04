@@ -17,5 +17,5 @@ public interface UserService {
 
     public User findUserByEmail(String email);
 
-    boolean ifUserIdExistsInDatabase(Long userId);
+    boolean userIdExists(Long userId);
 }
