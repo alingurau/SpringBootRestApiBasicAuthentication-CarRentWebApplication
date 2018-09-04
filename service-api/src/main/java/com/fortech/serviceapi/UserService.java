@@ -4,22 +4,18 @@ import com.fortech.model.dto.UserDto;
 import com.fortech.model.entities.User;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-
 @Service
-public interface UserService  {
+public interface UserService {
 
-    User findUserByEmail(String email);
+    void saveUser(User user);
 
+    User getUser(Long id);
 
-    List<UserDto> readAllUsersDto();
+    User updateUser(Long id, UserDto userDto);
 
-//    User addUser(UserDto userDto);
+    void deleteUser(Long id);
 
-    User updateUser(Long userId, UserDto userDto);
+    public User findUserByEmail(String email);
 
-    void deleteUser(Long userId);
-
-    boolean ifUserIdExistsInDatabase(Long userId);
+    boolean userIdExists(Long userId);
 }

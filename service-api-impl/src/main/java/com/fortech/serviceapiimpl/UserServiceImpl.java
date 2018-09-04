@@ -23,8 +23,28 @@ public class UserServiceImpl implements UserService {
 //    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public boolean ifUserIdExistsInDatabase(Long userId) {
+    public boolean userIdExists(Long userId) {
         return userRepository.findById(userId).isPresent();
+    }
+
+    @Override
+    public void saveUser(User user) {
+
+    }
+
+    @Override
+    public User getUser(Long id) {
+        return null;
+    }
+
+    @Override
+    public User updateUser(Long id, UserDto userDto) {
+        return null;
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+
     }
 
     @Override
@@ -32,32 +52,32 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
-    @Override
-    public List<UserDto> readAllUsersDto() {
-        List<UserDto> user = new ArrayList<>();
-        userRepository.findAll().forEach((users) -> {
-            user.add(users.translateToUserDto());
-        });
-        return user;
-    }
+//    @Override
+//    public List<UserDto> readAllUsersDto() {
+//        List<UserDto> user = new ArrayList<>();
+//        userRepository.findAll().forEach((users) -> {
+//            user.add(users.translateToUserDto());
+//        });
+//        return user;
+//    }
 
 
-    @Override
-    public User updateUser(Long userId, UserDto userDto) {
-
-        User user = userRepository.findById(userId).get();
-        user.update(userDto);
-
-        return userRepository.save(user);
-    }
-
-    @Override
-    public void deleteUser(Long userId) {
-        userRepository.findAll().forEach(user -> {
-            userRepository.deleteById(userId);
-        });
-
-    }
+//    @Override
+//    public User updateUser(Long userId, UserDto userDto) {
+//
+//        User user = userRepository.findById(userId).get();
+//        user.update(userDto);
+//
+//        return userRepository.save(user);
+//    }
+//
+//    @Override
+//    public void deleteUser(Long userId) {
+//        userRepository.findAll().forEach(user -> {
+//            userRepository.deleteById(userId);
+//        });
+//
+//    }
 
 
 //    @Override
