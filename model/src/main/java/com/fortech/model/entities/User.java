@@ -19,13 +19,15 @@ public class User {
 
     private String email;
 
+    private String username;
+
     private String password;
 
     private boolean active;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> role;
+    private Set<Role> roles;
 
     public UserDto translateToUserDto() {
         UserDto userDto = new UserDto();
@@ -34,6 +36,7 @@ public class User {
         userDto.setEmail(this.email);
         userDto.setPassword(this.password);
         userDto.setActive(this.active);
+        userDto.setUsername(this.username);
         return userDto;
     }
 
@@ -43,6 +46,7 @@ public class User {
         this.email = userDto.getEmail();
         this.password = userDto.getPassword();
         this.active = userDto.isActive();
+        this.username = userDto.getUsername();
     }
 
     public Long getId() {
@@ -93,11 +97,19 @@ public class User {
         this.active = active;
     }
 
-    public Set<Role> getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Set<Role> role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

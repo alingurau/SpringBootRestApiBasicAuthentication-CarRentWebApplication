@@ -8,6 +8,7 @@ public class UserDto {
     private String password;
     private boolean active;
     private String role;
+    private String username;
 
     public String getFirstName() {
         return firstName;
@@ -55,5 +56,13 @@ public class UserDto {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = this.username;
     }
 }
