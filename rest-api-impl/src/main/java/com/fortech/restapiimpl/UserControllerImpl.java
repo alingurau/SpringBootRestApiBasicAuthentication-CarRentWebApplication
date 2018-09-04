@@ -38,13 +38,17 @@ public class UserControllerImpl implements UserController {
     public ResponseEntity updateUser(Long id, UserDto userDto) {
         if (userService.userIdExists(id)) {
             userService.updateUser(id, userDto);
-            return new ResponseEntity("USER UPDATED", HttpStatus.OK)
+            return new ResponseEntity("USER UPDATED", HttpStatus.OK);
         }
         return new ResponseEntity("INVALID INPUT", HttpStatus.BAD_REQUEST);
     }
 
     @Override
     public ResponseEntity deleteUser(Long id) {
-        return null;
+        if (userService.userIdExists(id)) {
+            userService.deleteUser(id);
+            return new ResponseEntity("USER DELETED", HttpStatus.OK);
+        }
+        return new ResponseEntity("INVALID REQUEST", HttpStatus.BAD_REQUEST);
     }
 }
