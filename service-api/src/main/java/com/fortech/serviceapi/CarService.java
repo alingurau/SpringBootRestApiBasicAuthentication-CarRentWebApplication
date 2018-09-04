@@ -9,14 +9,14 @@ import java.util.List;
 @Service
 public interface CarService {
 
-    List<CarDto> readAllCarsDto();
+    List<CarDto> listAllCarsAvailable();
 
     Car addCar(CarDto carDto);
 
-    Car updateCar(Long carId, CarDto carDto);
+    Car updateCar(Long id, CarDto carDto);
 
-    void deleteCar(Long carId);
+    void deleteCar(Long id);
 
-    boolean ifCarIdExistsInDatabase(Long carId);
+    boolean carIdExists(Long id);
 
 }

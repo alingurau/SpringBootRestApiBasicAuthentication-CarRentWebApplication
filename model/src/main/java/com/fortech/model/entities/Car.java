@@ -25,8 +25,10 @@ public class Car {
     private String description;
     @Column(name = "tariff")
     private double tariff;
+    @Column(name = "availability")
+    private boolean availability;
 
-    public CarDto carDto(){
+    public CarDto carDto() {
         CarDto car = new CarDto();
         car.setModel(this.model);
         car.setModelYear(this.modelYear);
@@ -34,16 +36,18 @@ public class Car {
         car.setTransmission(this.transmission);
         car.setDescription(this.description);
         car.setTariff(this.tariff);
+        car.setAvailability(this.availability);
         return car;
     }
 
-    public void update(CarDto carDto){
+    public void update(CarDto carDto) {
         this.model = carDto.getModel();
         this.modelYear = carDto.getModelYear();
         this.fuel = carDto.getFuel();
         this.transmission = carDto.getTransmission();
         this.description = carDto.getDescription();
-        this.tariff=carDto.getTariff();
+        this.tariff = carDto.getTariff();
+        this.availability = carDto.isAvailability();
     }
 
     public Long getId() {
@@ -100,5 +104,13 @@ public class Car {
 
     public void setTariff(double tariff) {
         this.tariff = tariff;
+    }
+
+    public boolean isAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
     }
 }
