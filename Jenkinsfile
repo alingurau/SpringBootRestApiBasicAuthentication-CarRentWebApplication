@@ -1,3 +1,7 @@
+stage('Initialize'){
+    def dockerHome = tool 'myDocker'
+    def mavenHome  = tool 'myMaven'
+}
 pipeline {
     agent any
     tools { 
