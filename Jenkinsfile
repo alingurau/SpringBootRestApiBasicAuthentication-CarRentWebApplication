@@ -1,9 +1,9 @@
 pipeline { 
-    agent any 
-    stages {
+    agent any  
+    stages { 
         stage('Build') { 
             steps { 
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+               echo 'This is a minimal pipeline.' 
             }
         }
     }
